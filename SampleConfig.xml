@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+    <!--comment>Daemon operation settings.</comment-->
+    <entry key="MAIN_WALLET_DAEMON_CLASS">com.cellulant.wallet.sync.SyncDaemon</entry>
+    <entry key="BUCKET_SIZE">20</entry>
+    <entry key="SLEEP_TIME">100</entry>
+    <entry key="UNPROCESSED_STATUS">0</entry>
+    <entry key="PROCESSED_STATUS">1</entry>
+    <entry key="FAILED_STATUS">3</entry>    
+    <entry key="MIN_RUN_ID">51</entry>
+    <entry key="MAX_MEM_CAPACITY">500</entry>
+    <entry key="MAX_RUN_ID">254</entry>
+    <entry key="NUM_OF_CHILDREN">20</entry>
+    <entry key="MAX_NUMBER_OF_SENDS">5</entry>
+    <entry key="CURRENT_RUN_AT_STARTUP">51</entry>    	
+
+    <!--comment>Logging related settings.</comment-->
+    <entry key="INFO_LOG_LEVEL">INFO</entry>
+    <entry key="ERROR_LOG_LEVEL">ERROR</entry>
+    <entry key="INFO_LOG_FILE">/var/log/applications/daemons/SyncDaemonLogs/syncAppInfo2.log</entry>
+    <entry key="ERROR_LOG_FILE">/var/log/applications/daemons/SyncDaemonLogs/syncAppError2.log</entry>
+    <entry key="MAX_LOGFILE_SIZE">100MB</entry>
+    <entry key="MAX_LOGFILE_NUMBER">10</entry>
+
+    <!--comment> Database Related settings. </comment-->
+    <entry key="DB_POOL_NAME">SyncDaemon</entry>
+    <entry key="DB_POOL_SIZE">10</entry>
+        <entry key="DB_USER_NAME">root</entry>
+    <entry key="DB_PASSWORD">r00t</entry>
+    <entry key="DB_HOST">localhost</entry>
+    <entry key="DB_PORT">3306</entry>
+    <entry key="DB_NAME">wallet</entry>
+
+  
+    <!--
+          Put the time between the lapses. ie 
+            for the first 3 retries | next 3 retries | for substequent retries.         
+    -->
+    <entry key="NEXT_EARLIEST_TIME_TO_RESEND">0.25|0.25|0.25</entry>
+    
+    
+    <!--comment>Tables to be synchronized.</comment-->
+
+
+
+    <!-- This is where you specify the tables to be synchronized.  -->
+    
+    <!-- This is a placeholder for the primary key in select queries below. -->
+    <entry key="PRIMARY_KEY_IDENTIFIER">@@PK_ID@@</entry>
+    <entry key="TABLES_TO_SYNC" >customers</entry>
+    <!-- The format should be as follows. 
+            #table Name | primary Key | select query
+    -->   
+    <entry key="SYNC_TABLES">
+        #customers|customerID|select customerID as clientCustomerID , otherNames ,surname, salutation, languageID, active from customers where customerID = @@PK_ID@@
+        #profiles|customerID|select customerID ,clientID, otherNames ,surname, salutation, languageID, active from customers where customerID = @@PK_ID@@
+    </entry>
+    
+    
+    
+    
+    
+
+</properties>
